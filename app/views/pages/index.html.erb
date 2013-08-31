@@ -1,0 +1,32 @@
+<section class="content">
+
+  <h1>Draw gesture.</h1>
+  <p>Use the settings below to configure an automated slideshow, containing different poses. Now get good.</p>
+
+  <h2>Slideshow settings</h2>
+
+  <form action="/poses" method="get">
+    <fieldset>
+      <h3>Slide duration</h3>
+      <div class="form-item"><input type="radio" name="duration" value="5" id="duration_5" checked> <label for="duration_5">5 seconds</label></div>
+      <div class="form-item"><input type="radio" name="duration" value="30" id="duration_30" checked> <label for="duration_30">30 seconds</label></div>
+      <div class="form-item"><input type="radio" name="duration" value="60" id="duration_60"> <label for="duration_60">60 seconds</label></div>
+      <div class="form-item"><input type="radio" name="duration" value="120" id="duration_120"> <label for="duration_120">120 seconds</label></div>
+    </fieldset>
+    <fieldset>
+      <h3>Model gender</h3>
+      <div class="form-item"><input type="radio" name="gender" value="all" id="gender_all" checked> <label for="gender_all">All</label></div>
+      <div class="form-item"><input type="radio" name="gender" value="male" id="gender_male"> <label for="gender_male">Male</label></div>
+      <div class="form-item"><input type="radio" name="gender" value="female" id="gender_female"> <label for="gender_female">Female</label></div>
+    </fieldset>
+    <fieldset>
+      <h3>Nude</h3>
+      <div class="form-item"><input type="radio" name="nude" value="all" id="clothing_all" checked> <label for="clothing_all">Don't care</label></div>
+      <div class="form-item"><input type="radio" name="nude" value="1" id="clothing_nude"> <label for="clothing_nude">Yes</label></div>
+      <div class="form-item"><input type="radio" name="nude" value="0" id="clothing_clothed"> <label for="clothing_clothed">No</label></div>
+    </fieldset>
+
+    <div class="form-item"><input type="submit" value="Let's go"></div>
+  </form>
+
+</section>
