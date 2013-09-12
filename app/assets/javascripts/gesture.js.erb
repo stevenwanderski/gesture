@@ -1,0 +1,106 @@
+Gesture = {}
+
+Gesture.timer = '';
+Gesture.playing = true;
+Gesture.switching = false;
+Gesture.current = 0;
+
+function start_timer(milliseconds){
+  Gesture.timer = setTimeout(function(){
+    next_index();
+    go_to_slide(Gesture.current);
+  }, milliseconds);
+}
+
+function load_next_image(url, callback){
+  var image = $('<img />').attr('src', url);
+  $('.next-image').html(image);
+  image.load(callback);
+}
+
+function load_first_image(url, callback){
+  var image = $('<img />').attr('src', url);
+  $('.current-image').html(image);
+  image.load(callback);
+}
+
+function swap_images(){
+  Gesture.switching = true;
+  $('.current-image').fadeOut(1000);
+  $('.next-image').fadeIn(1000, function(){
+    $(this).prev('.current-image').remove();
+    $(this).addClass('current-image').removeClass('next-image');
+    $(this).after($('<div />').addClass('next-image'));
+    if (Gesture.playing) start_timer(Gesture.duration);
+    Gesture.switching = false;
+  });
+}
+
+function pause_show(){
+  Gesture.control_pause.html('start');
+  clearInterval(Gesture.timer);
+  Gesture.playing = false;
+}
+
+function start_show(){
+  Gesture.control_pause.html('pause');
+  start_timer(Gesture.duration);
+  Gesture.playing = true;
+}
+
+function go_to_slide(index){
+  load_next_image(Gesture.poses[index].image.tool.url, function(){
+    swap_images();
+  });
+}
+
+function next_index(){
+  if(Gesture.current == Gesture.poses.length - 1){
+    Gesture.current = 0;
+  }else{
+    ++Gesture.current;
+  }
+}
+
+function prev_index(){
+  if(Gesture.current == 0){
+    Gesture.current = Gesture.poses.length - 1;
+  }else{
+    --Gesture.current;
+  }
+}
+
+$(function(){
+
+  Gesture.control_pause = $('[data-control="pause"]');
+  Gesture.control_next = $('[data-control="next"]');
+  Gesture.control_prev = $('[data-control="prev"]');
+
+  load_first_image(Gesture.poses[Gesture.current].image.tool.url, function(){
+    $('.loader').fadeOut(1000);
+    start_timer(Gesture.duration);
+  });
+
+  $('[data-control]').click(function(e) {
+    e.preventDefault();
+  });
+
+  Gesture.control_pause.click(function(e) {
+    Gesture.playing ? pause_show() : start_show();
+  });
+
+  Gesture.control_next.click(function(e) {
+    if (Gesture.switching == true) return;
+    pause_show();
+    next_index();
+    go_to_slide(Gesture.current);
+  });
+
+  Gesture.control_prev.click(function(e) {
+    if (Gesture.switching == true) return;
+    pause_show();
+    prev_index();
+    go_to_slide(Gesture.current);
+  });
+
+});
