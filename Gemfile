@@ -15,6 +15,7 @@ gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'awesome_print'
+gem 'therubyracer'
 
 group :development do
   gem 'better_errors'
