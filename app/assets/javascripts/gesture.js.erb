@@ -72,6 +72,8 @@ function prev_index(){
 
 $(function(){
 
+  if ($('.index').length) return;
+
   Gesture.control_pause = $('[data-control="pause"]');
   Gesture.control_next = $('[data-control="next"]');
   Gesture.control_prev = $('[data-control="prev"]');
@@ -90,6 +92,13 @@ $(function(){
   });
 
   Gesture.control_next.click(function(e) {
+    if (Gesture.switching == true) return;
+    pause_show();
+    next_index();
+    go_to_slide(Gesture.current);
+  });
+
+  $(document).on('click', '.current-image img', function(e) {
     if (Gesture.switching == true) return;
     pause_show();
     next_index();

@@ -23,18 +23,19 @@ html, body {
 
 h1 {
   text-align: center;
-  font-size: 52px;
+  /*font-size: 52px;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 30px;*/
 }
 
-h2 {
+/*h2 {
   margin-bottom: 20px;
 }
 
 h3 {
   margin-bottom: 10px;
 }
+*/
 
 .images {
   height: 100%;
@@ -46,7 +47,7 @@ h3 {
   max-height: 100%;
 }
 
-.bx-controls {
+.controls {
   position: absolute;
   background: rgba(255, 255, 255, .5);
   padding: 8px;
@@ -54,8 +55,13 @@ h3 {
   left: 0;
   z-index: 99;
   font-size: 24px;
+  width: 10%;
+  min-width: 80px;
 
-  a { display: block; }
+  a {
+    display: block;
+    margin-bottom: 10px;
+  }
 }
 
 .current-image,
@@ -132,3 +138,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+label {
+  display: block;
+  cursor: pointer;
+}

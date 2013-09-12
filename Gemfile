@@ -16,6 +16,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'awesome_print'
 gem 'therubyracer'
+# gem "flat-ui-rails"
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails', :branch => '3.0.0'
 
 group :development do
   gem 'better_errors'
