@@ -3,10 +3,6 @@
   padding: 0;
 }
 
-body {
-  font-family: Georgia;
-}
-
 html, body {
   height: 100%;
 }
@@ -22,20 +18,9 @@ html, body {
 }
 
 h1 {
-  text-align: center;
-  /*font-size: 52px;
-  color: #333;
-  margin-bottom: 30px;*/
+  /*text-align: center;*/
+  font-size: 3.5em;
 }
-
-/*h2 {
-  margin-bottom: 20px;
-}
-
-h3 {
-  margin-bottom: 10px;
-}
-*/
 
 .images {
   height: 100%;
@@ -73,14 +58,15 @@ h3 {
 }
 
 .content {
-  margin: 0 auto;
+  margin: 0 auto 30px;
   width: 100%;
   max-width: 800px;
 }
 
 .content p {
-  text-align: center;
   margin: 20px 0;
+  font-size: 1.25em;
+  line-height: 1.5em;
 }
 
 .time-wrap {
@@ -142,3 +128,5 @@ label {
   display: block;
   cursor: pointer;
 }
+
+form .btn.btn-large { font-size: 1.5em; }

@@ -1,32 +1,46 @@
 <section class="content">
 
   <h1>Draw gesture.</h1>
-  <p>Use the settings below to configure an automated slideshow, containing different poses. Now get good.</p>
-
-  <h2>Slideshow settings</h2>
+  <p>This tool provides high-quality human models for the purposes of figure drawing. Models are presented in an automated slideshow format. This tool is often useful for gesture drawing, which involves the quick sketching of many different poses.</p>
+  <p>Use the settings below to configure the automated slideshow. Now get good.</p>
 
   <form action="/poses" method="get">
-    <fieldset>
-      <h3>Slide duration</h3>
-      <label class="radio"><input type="radio" data-toggle="radio" name="duration" value="5" id="duration_5">5 seconds</label>
-      <label class="radio"><input type="radio" data-toggle="radio" name="duration" value="30" id="duration_30" checked="checked">30 seconds</label>
-      <label class="radio"><input type="radio" data-toggle="radio" name="duration" value="60" id="duration_60">60 seconds</label>
-      <label class="radio"><input type="radio" data-toggle="radio" name="duration" value="120" id="duration_120">120 seconds</label>
-    </fieldset>
-    <fieldset>
-      <h3>Model gender</h3>
-      <label class="radio"><input type="radio" data-toggle="radio" name="gender" value="all" id="gender_all" checked="checked">All</label>
-      <label class="radio"><input type="radio" data-toggle="radio" name="gender" value="male" id="gender_male">Male</label>
-      <label class="radio"><input type="radio" data-toggle="radio" name="gender" value="female" id="gender_female">Female</label>
-    </fieldset>
-    <fieldset>
-      <h3>Nude</h3>
-      <label class="radio"><input type="radio" data-toggle="radio" name="nude" value="all" id="clothing_all" checked="checked">Don't care</label>
-      <label class="radio"><input type="radio" data-toggle="radio" name="nude" value="1" id="clothing_nude">Yes</label>
-      <label class="radio"><input type="radio" data-toggle="radio" name="nude" value="0" id="clothing_clothed">No</label>
-    </fieldset>
 
-    <div class="form-item"><input type="submit" value="Let's go" class="btn btn-large btn-primary"></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Slide duration</div>
+      </div>
+      <div class="panel-body">
+        <label class="radio"><input type="radio" data-toggle="radio" name="duration" value="5" id="duration_5">5 seconds</label>
+        <label class="radio"><input type="radio" data-toggle="radio" name="duration" value="30" id="duration_30" checked="checked">30 seconds</label>
+        <label class="radio"><input type="radio" data-toggle="radio" name="duration" value="60" id="duration_60">60 seconds</label>
+        <label class="radio"><input type="radio" data-toggle="radio" name="duration" value="120" id="duration_120">120 seconds</label>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Model gender</div>
+      </div>
+      <div class="panel-body">
+        <label class="radio"><input type="radio" data-toggle="radio" name="gender" value="all" id="gender_all" checked="checked">All</label>
+        <label class="radio"><input type="radio" data-toggle="radio" name="gender" value="male" id="gender_male">Male</label>
+        <label class="radio"><input type="radio" data-toggle="radio" name="gender" value="female" id="gender_female">Female</label>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Nude</div>
+      </div>
+      <div class="panel-body">
+        <label class="radio"><input type="radio" data-toggle="radio" name="nude" value="all" id="clothing_all" checked="checked">Don't care</label>
+        <label class="radio"><input type="radio" data-toggle="radio" name="nude" value="1" id="clothing_nude">Yes</label>
+        <label class="radio"><input type="radio" data-toggle="radio" name="nude" value="0" id="clothing_clothed">No</label>
+      </div>
+    </div>
+
+    <div class="form-item"><input type="submit" value="Start drawing" class="btn btn-large btn-primary"></div>
   </form>
 
 </section>
