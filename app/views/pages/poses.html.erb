@@ -3,19 +3,21 @@
   Gesture.poses = <%= @poses.to_json.html_safe %>
 </script>
 
+<div class="controls">
+  <div class="left">
+    <a data-control="prev" class="btn btn-info" href="">prev</a>
+    <a data-control="next" class="btn btn-info" href="">next</a>
+    <a data-control="pause" class="btn btn-info" href="">pause</a>
+  </div>
+  <div class="right">
+    <a href="/" class="btn">home</a>
+  </div>
+</div>
+
 <div class="images">
 
   <div class="loader">
     <div class="inner">Loading...</div>
-  </div>
-
-  <div class="controls">
-    <a data-control="next" class="btn btn-large btn-info" href="">next</a>
-    <a data-control="prev" class="btn btn-large btn-info" href="">prev</a>
-    <br>
-    <a data-control="pause" class="btn btn-large btn-info" href="">pause</a>
-    <br>
-    <a href="/" class="btn btn-large">home</a>
   </div>
 
   <div class="current-image"></div>
