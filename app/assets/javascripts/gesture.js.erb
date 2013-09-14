@@ -37,13 +37,13 @@ function swap_images(){
 }
 
 function pause_show(){
-  Gesture.control_pause.html('start');
+  Gesture.control_pause.html('<span class="glyphicon glyphicon-play"></span>');
   clearInterval(Gesture.timer);
   Gesture.playing = false;
 }
 
 function start_show(){
-  Gesture.control_pause.html('pause');
+  Gesture.control_pause.html('<span class="glyphicon glyphicon-pause"></span>');
   start_timer(Gesture.duration);
   Gesture.playing = true;
 }
