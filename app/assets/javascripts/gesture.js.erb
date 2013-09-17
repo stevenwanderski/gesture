@@ -26,8 +26,8 @@ function load_first_image(url, callback){
 
 function swap_images(){
   Gesture.switching = true;
-  $('.current-image').fadeOut(1000);
-  $('.next-image').fadeIn(1000, function(){
+  $('.current-image').fadeOut(400);
+  $('.next-image').fadeIn(400, function(){
     $(this).prev('.current-image').remove();
     $(this).addClass('current-image').removeClass('next-image');
     $(this).after($('<div />').addClass('next-image'));
@@ -72,7 +72,11 @@ function prev_index(){
 
 $(function(){
 
-  if ($('.index').length) return;
+  window.scrollTo(0, 0);
+
+  $('html, body').on('touchmove', function(e){
+    e.preventDefault();
+  });
 
   Gesture.control_pause = $('[data-control="pause"]');
   Gesture.control_next = $('[data-control="next"]');
