@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require flatui-radio
+//= require swipe
 //= require gesture

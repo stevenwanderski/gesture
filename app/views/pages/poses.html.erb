@@ -14,12 +14,16 @@
   </div>
 </div>
 
-<div class="images">
+<div class="loader">
+  <div class="inner">Loading...</div>
+</div>
 
-  <div class="loader">
-    <div class="inner">Loading...</div>
+<div id='slider' class='swipe'>
+  <div class='swipe-wrap'>
+    <div class="slide"><%= image_tag @pose1.image.url %></div>
+    <div class="slide"><%= image_tag @pose2.image.url %></div>
+    <% @poses.each do |pose| %>
+      <div class="slide"><div class="image-loading">Loading...</div></div>
+    <% end %>
   </div>
-
-  <div class="current-image"></div>
-  <div class="next-image"></div>
 </div>

@@ -1,9 +1,4 @@
-Gesture = {}
-
-Gesture.timer = '';
-Gesture.playing = true;
-Gesture.switching = false;
-Gesture.current = 0;
+Gesture = {};
 
 function start_timer(milliseconds){
   Gesture.timer = setTimeout(function(){
@@ -72,48 +67,39 @@ function prev_index(){
 
 $(function(){
 
-  window.scrollTo(0, 0);
+  Gesture.slider = Swipe(document.getElementById('slider'), {
+    transitionEnd: slide_callback,
+    continuous: false,
+  });
 
-  $('html, body').on('touchmove', function(e){
+  $('[data-control="next"]').click(function(e) {
     e.preventDefault();
+    Gesture.slider.next();
   });
 
-  Gesture.control_pause = $('[data-control="pause"]');
-  Gesture.control_next = $('[data-control="next"]');
-  Gesture.control_prev = $('[data-control="prev"]');
-
-  load_first_image(Gesture.poses[Gesture.current].image.tool.url, function(){
-    $('.loader').fadeOut(1000);
-    start_timer(Gesture.duration);
-  });
-
-  $('[data-control]').click(function(e) {
+  $('[data-control="prev"]').click(function(e) {
     e.preventDefault();
+    Gesture.slider.prev();
   });
 
-  Gesture.control_pause.click(function(e) {
-    Gesture.playing ? pause_show() : start_show();
-  });
-
-  Gesture.control_next.click(function(e) {
-    if (Gesture.switching == true) return;
-    pause_show();
-    next_index();
-    go_to_slide(Gesture.current);
-  });
-
-  $(document).on('click', '.current-image img', function(e) {
-    if (Gesture.switching == true) return;
-    pause_show();
-    next_index();
-    go_to_slide(Gesture.current);
-  });
-
-  Gesture.control_prev.click(function(e) {
-    if (Gesture.switching == true) return;
-    pause_show();
-    prev_index();
-    go_to_slide(Gesture.current);
+  $('.slide img').load(function(){
+    $('.loader').fadeOut(500);
   });
 
 });
+
+function slide_callback(e){
+  var current_index = Gesture.slider.getPos();
+  var next_el = $('.slide').eq(current_index + 1);
+  if(next_el.find('img').length == 0){
+    load_image(next_el, current_index + 1);
+  }
+}
+
+function load_image(el, index){
+  var image_url = Gesture.poses[index].image.url;
+  var image = $('<img />').attr('src', image_url);
+  image.load(function(){
+    el.html(image);
+  });
+}
