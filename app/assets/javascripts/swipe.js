@@ -227,6 +227,8 @@ function Swipe(container, options) {
     delay = 0;
     clearTimeout(interval);
 
+    options.stopCallback && options.stopCallback();
+
   }
 
 

@@ -11,6 +11,7 @@ $(function(){
 
   Gesture.slider = Swipe(document.getElementById('slider'), {
     callback: slide_callback,
+    stopCallback: stop_callback,
     continuous: false,
     disableScroll: true,
     auto: Gesture.duration,
@@ -32,7 +33,12 @@ $(function(){
 
   Gesture.controls.pause.click(function(e) {
     e.preventDefault();
-    Gesture.playing ? Gesture.stop() : Gesture.start();
+    if(Gesture.playing){
+      Gesture.slider.stop();
+      Gesture.stop();
+    }else{
+      Gesture.start();
+    }
   });
 
   $('.slide img').load(function(){
@@ -49,6 +55,10 @@ function slide_callback(e){
   }
 }
 
+function stop_callback(){
+  Gesture.stop();
+}
+
 function load_image(el, index){
   var image_url = Gesture.poses[index].image.url;
   var image = $('<img />').attr('src', image_url);
@@ -59,7 +69,6 @@ function load_image(el, index){
 
 Gesture.stop = function(){
   Gesture.playing = false;
-  Gesture.slider.stop();
   Gesture.controls.pause.html('<span class="glyphicon glyphicon-play"></span>');
 }
 
