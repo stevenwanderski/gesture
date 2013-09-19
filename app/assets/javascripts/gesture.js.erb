@@ -1,23 +1,38 @@
 Gesture = {};
+Gesture.controls = {};
 
 $(function(){
 
   window.scrollTo(0, 0);
 
+  Gesture.controls.next = $('[data-control="next"]');
+  Gesture.controls.prev = $('[data-control="prev"]');
+  Gesture.controls.pause = $('[data-control="pause"]');
+
   Gesture.slider = Swipe(document.getElementById('slider'), {
     callback: slide_callback,
     continuous: false,
-    disableScroll: true
+    disableScroll: true,
+    auto: Gesture.duration,
   });
 
-  $('[data-control="next"]').click(function(e) {
+  Gesture.playing = true;
+
+  Gesture.controls.next.click(function(e) {
     e.preventDefault();
+    Gesture.stop();
     Gesture.slider.next();
   });
 
-  $('[data-control="prev"]').click(function(e) {
+  Gesture.controls.prev.click(function(e) {
     e.preventDefault();
+    Gesture.stop();
     Gesture.slider.prev();
+  });
+
+  Gesture.controls.pause.click(function(e) {
+    e.preventDefault();
+    Gesture.playing ? Gesture.stop() : Gesture.start();
   });
 
   $('.slide img').load(function(){
@@ -40,4 +55,16 @@ function load_image(el, index){
   image.load(function(){
     el.html(image);
   });
+}
+
+Gesture.stop = function(){
+  Gesture.playing = false;
+  Gesture.slider.stop();
+  Gesture.controls.pause.html('<span class="glyphicon glyphicon-play"></span>');
+}
+
+Gesture.start = function(){
+  Gesture.playing = true;
+  Gesture.slider.start();
+  Gesture.controls.pause.html('<span class="glyphicon glyphicon-pause"></span>');
 }
