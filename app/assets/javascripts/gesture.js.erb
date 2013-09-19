@@ -1,75 +1,13 @@
 Gesture = {};
 
-function start_timer(milliseconds){
-  Gesture.timer = setTimeout(function(){
-    next_index();
-    go_to_slide(Gesture.current);
-  }, milliseconds);
-}
-
-function load_next_image(url, callback){
-  var image = $('<img />').attr('src', url);
-  $('.next-image').html(image);
-  image.load(callback);
-}
-
-function load_first_image(url, callback){
-  var image = $('<img />').attr('src', url);
-  $('.current-image').html(image);
-  image.load(callback);
-}
-
-function swap_images(){
-  Gesture.switching = true;
-  $('.current-image').fadeOut(400);
-  $('.next-image').fadeIn(400, function(){
-    $(this).prev('.current-image').remove();
-    $(this).addClass('current-image').removeClass('next-image');
-    $(this).after($('<div />').addClass('next-image'));
-    if (Gesture.playing) start_timer(Gesture.duration);
-    Gesture.switching = false;
-  });
-}
-
-function pause_show(){
-  Gesture.control_pause.html('<span class="glyphicon glyphicon-play"></span>');
-  clearInterval(Gesture.timer);
-  Gesture.playing = false;
-}
-
-function start_show(){
-  Gesture.control_pause.html('<span class="glyphicon glyphicon-pause"></span>');
-  start_timer(Gesture.duration);
-  Gesture.playing = true;
-}
-
-function go_to_slide(index){
-  load_next_image(Gesture.poses[index].image.tool.url, function(){
-    swap_images();
-  });
-}
-
-function next_index(){
-  if(Gesture.current == Gesture.poses.length - 1){
-    Gesture.current = 0;
-  }else{
-    ++Gesture.current;
-  }
-}
-
-function prev_index(){
-  if(Gesture.current == 0){
-    Gesture.current = Gesture.poses.length - 1;
-  }else{
-    --Gesture.current;
-  }
-}
-
 $(function(){
 
+  window.scrollTo(0, 0);
+
   Gesture.slider = Swipe(document.getElementById('slider'), {
-    transitionEnd: slide_callback,
+    callback: slide_callback,
     continuous: false,
+    disableScroll: true
   });
 
   $('[data-control="next"]').click(function(e) {
