@@ -8,5 +8,6 @@ class PagesController < ApplicationController
     @pose1 = @poses.shift
     @pose2 = @poses.shift
     @duration = params[:duration].to_i * 1000
+    @timer = params[:timer]
   end
 end

@@ -18,16 +18,15 @@ $(function(){
   });
 
   Gesture.playing = true;
+  Gesture.start_progress();
 
   Gesture.controls.next.click(function(e) {
     e.preventDefault();
-    Gesture.stop();
     Gesture.slider.next();
   });
 
   Gesture.controls.prev.click(function(e) {
     e.preventDefault();
-    Gesture.stop();
     Gesture.slider.prev();
   });
 
@@ -35,7 +34,6 @@ $(function(){
     e.preventDefault();
     if(Gesture.playing){
       Gesture.slider.stop();
-      Gesture.stop();
     }else{
       Gesture.start();
     }
@@ -53,6 +51,7 @@ function slide_callback(e){
   if(next_el.find('img').length == 0){
     load_image(next_el, current_index + 1);
   }
+  if(Gesture.timer && Gesture.playing) Gesture.start_progress();
 }
 
 function stop_callback(){
@@ -70,10 +69,23 @@ function load_image(el, index){
 Gesture.stop = function(){
   Gesture.playing = false;
   Gesture.controls.pause.html('<span class="glyphicon glyphicon-play"></span>');
+  if(Gesture.timer) Gesture.reset_progress();
 }
 
 Gesture.start = function(){
   Gesture.playing = true;
   Gesture.slider.start();
   Gesture.controls.pause.html('<span class="glyphicon glyphicon-pause"></span>');
+  if(Gesture.timer) Gesture.start_progress();
+}
+
+Gesture.start_progress = function(){
+  Gesture.reset_progress();
+  $('.progress').show();
+  $('.progress-bar').animate({width: '100%'}, Gesture.duration, 'linear');
+}
+
+Gesture.reset_progress = function(){
+  $('.progress-bar').stop(true).width(0);
+  $('.progress').hide();
 }

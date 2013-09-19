@@ -1,4 +1,5 @@
 <script>
+  Gesture.timer = <%= @timer == "on"? true : false %>
   Gesture.duration = <%= @duration %>
   Gesture.poses = <%= @poses.to_json.html_safe %>
 </script>
@@ -17,6 +18,10 @@
 <div class="loader">
   <div class="inner">Loading...</div>
 </div>
+
+<% if @timer == "on" %>
+<div class="progress"><div class="progress-bar"></div></div>
+<% end %>
 
 <div id='slider' class='swipe'>
   <div class='swipe-wrap'>

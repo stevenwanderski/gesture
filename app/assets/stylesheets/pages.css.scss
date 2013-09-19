@@ -107,20 +107,20 @@ form .btn.btn-large { font-size: 1.5em; }
   line-height: 1.5em;
 }
 
-.time-wrap {
-  width: 100%;
-  height: 10px;
-  background: #ccc;
+.progress {
+  height: 6px;
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 999;
+  top: 60px;
+  left: 10px;
+  right: 10px;
+  z-index: 99;
 }
 
-.time-expired {
+.progress-bar {
+  width: 0%;
   height: 100%;
-  max-width: 100%;
-  background: #666
+  background: #ccc;
+  border-radius: 32px;
 }
 
 .loader {
