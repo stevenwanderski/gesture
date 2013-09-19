@@ -1,35 +1,32 @@
+// Setup our namespace
 Gesture = {};
 Gesture.controls = {};
+Gesture.callbacks = {};
+Gesture.loaded = [];
 
 $(function(){
 
+  // Hide the top browser window on mobile
   window.scrollTo(0, 0);
 
+  // Cache our control elements
   Gesture.controls.next = $('[data-control="next"]');
   Gesture.controls.prev = $('[data-control="prev"]');
   Gesture.controls.pause = $('[data-control="pause"]');
 
-  Gesture.slider = Swipe(document.getElementById('slider'), {
-    callback: slide_callback,
-    stopCallback: stop_callback,
-    continuous: false,
-    disableScroll: true,
-    auto: Gesture.duration,
-  });
-
-  Gesture.playing = true;
-  Gesture.start_progress();
-
+  // Control click: next
   Gesture.controls.next.click(function(e) {
     e.preventDefault();
     Gesture.slider.next();
   });
 
+  // Control click: previous
   Gesture.controls.prev.click(function(e) {
     e.preventDefault();
     Gesture.slider.prev();
   });
 
+  // Control click: pause / play
   Gesture.controls.pause.click(function(e) {
     e.preventDefault();
     if(Gesture.playing){
@@ -39,26 +36,30 @@ $(function(){
     }
   });
 
-  $('.slide img').load(function(){
-    $('.loader').fadeOut(500);
+  // Wait until the first two images load, then initialize and fade in the interface
+  $('.slide img').each(function(){
+    $(this).load(function(){
+      Gesture.loaded.push($(this));
+      if(Gesture.loaded.length == $('.slide img').length) Gesture.init();
+    });
   });
 
 });
 
-function slide_callback(e){
+Gesture.callbacks.slide_change = function(){
   var current_index = Gesture.slider.getPos();
   var next_el = $('.slide').eq(current_index + 1);
   if(next_el.find('img').length == 0){
-    load_image(next_el, current_index + 1);
+    Gesture.load_image(next_el, current_index + 1);
   }
   if(Gesture.timer && Gesture.playing) Gesture.start_progress();
 }
 
-function stop_callback(){
+Gesture.callbacks.stop = function(){
   Gesture.stop();
 }
 
-function load_image(el, index){
+Gesture.load_image = function(el, index){
   var image_url = Gesture.poses[index].image.url;
   var image = $('<img />').attr('src', image_url);
   image.load(function(){
@@ -88,4 +89,23 @@ Gesture.start_progress = function(){
 Gesture.reset_progress = function(){
   $('.progress-bar').stop(true).width(0);
   $('.progress').hide();
+}
+
+Gesture.init = function(){
+  // Initiate the Swipe.js plugin
+  Gesture.slider = Swipe(document.getElementById('slider'), {
+    callback: Gesture.callbacks.slide_change,
+    stopCallback: Gesture.callbacks.stop,
+    continuous: false,
+    disableScroll: true,
+    auto: Gesture.duration,
+  });
+
+  // Initialize the playing status variable
+  Gesture.playing = true;
+
+  // If the timer is present, start the progress bar
+  if(Gesture.timer) Gesture.start_progress();
+
+  $('.loader').fadeOut(500);
 }
