@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   end
 
   def poses
-    @poses = Pose.gender(params[:gender]).nude(params[:nude]).limit(50).order('RAND()')
+    @poses = Pose.gender(params[:gender]).nude(params[:nude]).limit(40).order('RAND()')
     @poses = @poses.shuffle
     @pose1 = @poses.shift
     @pose2 = @poses.shift

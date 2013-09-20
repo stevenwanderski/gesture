@@ -48,6 +48,15 @@ $(function(){
 
 Gesture.callbacks.slide_change = function(){
   var current_index = Gesture.slider.getPos();
+  var num_slides = Gesture.slider.getNumSlides();
+
+  if(Gesture.poses[current_index + 1] == undefined){
+    Gesture.slider.stop();
+    alert("This is the last pose in the set. Click OK to refresh a new set of poses.");
+    window.location.reload();
+    return;
+  }
+
   var next_el = $('.slide').eq(current_index + 1);
   if(next_el.find('img').length == 0){
     Gesture.load_image(next_el, current_index + 1);
