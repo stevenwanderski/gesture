@@ -15,17 +15,17 @@
   </div>
 </div>
 
-<!-- <div class="loader">
+<div class="loader">
   <div class="inner">Loading...</div>
 </div>
- -->
+
 <% if @timer == "on" %>
 <div class="progress"><div class="progress-bar"></div></div>
 <% end %>
 
 <div id='slider' class='swipe'>
   <div class='swipe-wrap'>
-    <div class="slide"><div class="slide-image" style="background-image: url(<%= @pose1.image.url %>);"></div></div>
+    <div class="slide"><div class="slide-image" style="background-image: url(<%= @pose1.image.url %>);" data-image-src="<%= @pose1.image.url %>"></div></div>
     <div class="slide"><div class="slide-image" style="background-image: url(<%= @pose2.image.url %>);"></div></div>
     <% @poses.each do |pose| %>
       <div class="slide"><div class="slide-image"></div></div>

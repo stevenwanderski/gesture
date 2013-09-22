@@ -36,15 +36,8 @@ $(function(){
     }
   });
 
-  Gesture.init();
-
-  // Wait until the first two images load, then initialize and fade in the interface
-  // $('.slide img').each(function(){
-  //   $(this).load(function(){
-  //     Gesture.loaded.push($(this));
-  //     if(Gesture.loaded.length == $('.slide img').length) Gesture.init();
-  //   });
-  // });
+  // Wait until the first image loads, then initialize and fade in the interface
+  Gesture.load_first_image(Gesture.init);
 
 });
 
@@ -73,10 +66,14 @@ Gesture.callbacks.stop = function(){
 Gesture.load_image = function(el, index){
   var image_url = Gesture.poses[index].image.url;
   el.find('.slide-image').css('background-image', 'url(' + image_url + ')');
-  // var image = $('<img />').attr('src', image_url);
-  // image.load(function(){
-  //   el.html(image);
-  // });
+}
+
+Gesture.load_first_image = function(callback){
+  var src = $('.slide-image:first').attr('data-image-src');
+  $('<img/>').attr('src', src).load(function() {
+     $(this).remove(); // prevent memory leaks as @benweet suggested
+     callback();
+  });
 }
 
 Gesture.stop = function(){
