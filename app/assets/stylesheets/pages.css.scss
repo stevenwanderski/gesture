@@ -70,6 +70,14 @@ form .btn.btn-large { font-size: 1.5em; }
   padding-top: 60px;
 }
 
+.slide-image {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
 .controls {
   position: fixed;
   top: 0;

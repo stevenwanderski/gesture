@@ -36,13 +36,15 @@ $(function(){
     }
   });
 
+  Gesture.init();
+
   // Wait until the first two images load, then initialize and fade in the interface
-  $('.slide img').each(function(){
-    $(this).load(function(){
-      Gesture.loaded.push($(this));
-      if(Gesture.loaded.length == $('.slide img').length) Gesture.init();
-    });
-  });
+  // $('.slide img').each(function(){
+  //   $(this).load(function(){
+  //     Gesture.loaded.push($(this));
+  //     if(Gesture.loaded.length == $('.slide img').length) Gesture.init();
+  //   });
+  // });
 
 });
 
@@ -70,10 +72,11 @@ Gesture.callbacks.stop = function(){
 
 Gesture.load_image = function(el, index){
   var image_url = Gesture.poses[index].image.url;
-  var image = $('<img />').attr('src', image_url);
-  image.load(function(){
-    el.html(image);
-  });
+  el.find('.slide-image').css('background-image', 'url(' + image_url + ')');
+  // var image = $('<img />').attr('src', image_url);
+  // image.load(function(){
+  //   el.html(image);
+  // });
 }
 
 Gesture.stop = function(){
